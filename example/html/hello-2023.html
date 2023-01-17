@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            .black {
+                background-color: black;
+            }            
+            .snowflake {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: white;
+                position: absolute;
+                top: -8px;
+            }
+            @keyframes fall {
+                from {
+                } to {
+                    transform: translateY(100vh);
+                    opacity: 0;
+                }
+            }
+            .year {
+                color: white;
+                position: absolute;
+                top: 52vh;
+                left: calc(50vw - 92px);
+                font-size: 60pt;
+            }
+            .image {
+                position: absolute;
+                top: 42vh;
+                left: calc(50vw - 115px);
+            }
+        </style>
+    </head>
+    <body class="black">
+        <div class="snowflake"></div>
+        <img 
+            class="image" 
+            src="https://mblogthumb-phinf.pstatic.net/MjAyMDA0MDRfMTA5/MDAxNTg1OTgyNzM0NDc4.T5kYmq6tRhKYUyg2VReNW9Lt3XmAVFXj1nm3mgnJkWUg.k-JIS4uUip4cqMMuaqnpgdPPt2qvtkU1Lre99Y9omq8g.JPEG.rara4000/1bd7453343646f106926d6d05f85cd77cb28b0be4679593ca208a4cd0fbd88075e5592f731f6.jpg?type=w800" 
+            width="230px" 
+            onerror="this.style.display='none'" 
+            alt="scg" 
+        />
+        <h1 class="year">2023</h1>
+    </body>
+</html>
+
+<script>
+    const MIN_DURATION = 10;
+    const body = document.querySelector("body");
+    const makeSnowFlake = () => {
+        const snowflake = document.createElement("div");
+        const delay = Math.random() * 10;
+        const initialOpacity = Math.random();
+        const duration = Math.random() * 20 + MIN_DURATION;
+        snowflake.classList.add("snowflake");
+        snowflake.style.left = `${Math.random() * window.screen.width}px`;
+        snowflake.style.animationDelay = `${delay}s`;
+        snowflake.style.opacity = initialOpacity;
+        snowflake.style.animation = `fall ${duration}s linear`;
+        body.appendChild(snowflake);
+        setTimeout(() => {
+            body.removeChild(snowflake);
+            makeSnowFlake()
+        }, (duration + delay) * 1000)
+    }
+    for (let index = 0; index < 100; index++) {
+        setTimeout(makeSnowFlake, 100 * index);
+    }
+</script>
